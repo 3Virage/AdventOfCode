@@ -9,8 +9,8 @@ class node {
 public:
 	string name;
 	unsigned short int value;
-	bool ready;
-	node() :name(""), value(0),ready(0) {}
+	bool ready; //ready to execute
+	node() :name(""), value(0), ready(0) {}
 };
 
 class gate {
@@ -38,8 +38,7 @@ public:
 	}
 
 	gate() :in1(node()), in2(node()), out(node()), operation(""), isdone(0) {}
-	
-	void print() { cout << in1.name<<"("<<in1.value <<")"<< " " << operation << " " << in2.name<<"(" << in2.value << ")"  << out.name <<"(" << out.value << ")"<< " " << endl; }
+	void print() { cout << in1.name << "(" << in1.value << ")" << " " << operation << " " << in2.name << "(" << in2.value << ")" << out.name << "(" << out.value << ")" << " " << endl; }
 };
 
 int main() {
@@ -91,13 +90,12 @@ int main() {
 	}
 	for (int j = 0; j <= 338; j++) {
 		for (int i = 0; i <= 338; i++) {
-		//	gates[i].print();
+			//	gates[i].print();
 			if (!gates[i].isdone)
 				if ((gates[i].in1.ready && gates[i].in2.ready) || (gates[i].in1.ready && gates[i].operation == "NOT") || (gates[i].in1.ready && gates[i].operation == "LSHIFT") || (gates[i].in1.ready && gates[i].operation == "RSHIFT") || (gates[i].in1.ready && gates[i].operation == ""))
 				{
 					gates[i].execute();
 					//	getchar();
-
 					for (int k = 0; k <= 338; k++) {
 						if (gates[k].in1.name == gates[i].out.name) {
 							gates[k].in1.value = gates[i].out.value;
@@ -111,13 +109,13 @@ int main() {
 				}
 		}
 	}
-	
+
 	for (int i = 0; i <= 338; i++)
 		if (gates[i].out.name == "a"&& gates[i].isdone)
 			gates[i].print();
 
-//second star---------------------------------------------------------
-// I've only changed fourth line in txt file
+	//second star---------------------------------------------------------
+	// I've only changed fourth line in txt file
 
 	getchar();
 	return 0;
