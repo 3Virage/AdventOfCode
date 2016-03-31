@@ -117,6 +117,7 @@ int main() {
 	//second star---------------------------------------------------------
 	// I've only changed fourth line in txt file
 
+
 	getchar();
 	return 0;
 }
