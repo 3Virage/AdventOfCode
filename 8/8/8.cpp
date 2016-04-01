@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 
 int main() {
@@ -38,30 +39,17 @@ if (character == '\\' && prev == '\\') {
 		ifstream data;
 		data.open("8.txt");
 		int encodecounter = 0;
-		int codecounter = 0;
-		char character='a';
-		char prev = 'a';
-		char prev2 = 'a';
-		bool slash;
-		while (data) {
-			data >> character;
-			codecounter++;
-			encodecounter++;
-			
-			if ((character == '"' && slash))
-				encodecounter++;
-			if (character == '\\' && prev == '\\'&& !slash)
-				slash = 1;
-			else
-				slash = 0;
-			prev2 = prev;
-			prev = character;
-			cout << character << " " << encodecounter << " " << codecounter << " ";
+			while (data) {
+			string str;
+			data >> str;
+			encodecounter+=2;
+			for (int i = 0; i < str.size(); i++) {
+				if (str[i] == '\\' || str[i] == '"')
+					encodecounter++;
+			}
+			cout << str << " " << encodecounter << " " ;
 		}
-		cout << encodecounter << endl;
-		cout << codecounter << endl;
-		cout << encodecounter - codecounter << endl;
-	
+
 	getchar();
 	return 0;
 }
